@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router';
+import { Navigate } from 'react-router-dom';
+import { getLogging } from 'redux/authSlice';
 
 export const PublicRoute = ({ children, restricted = false }) => {
-  const isLogged = useSelector(state => state.auth.isLoggedIn);
+  const isLogged = useSelector(getLogging);
 
   const redirect = isLogged && restricted;
 

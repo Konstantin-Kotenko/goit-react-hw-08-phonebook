@@ -1,6 +1,6 @@
 import { Formik, ErrorMessage } from 'formik';
 import { useRedux } from 'hooks/useRedux';
-import { Navigate } from 'react-router';
+import { Navigate } from 'react-router-dom';
 import {
   FormContact,
   Label,
@@ -21,13 +21,12 @@ const FormError = ({ name }) => (
 export const LoginForm = () => {
   const [dispatch] = useRedux();
 
-  const handleSubmit = values => {
+  const handleSubmit = ({ email, password }) => {
     const user = {
-      email: values.email,
-      password: values.password,
+      email,
+      password,
     };
     dispatch(loginUser(user));
-    // <Redirect to="/contacts" />;
     <Navigate to="contacts" replace />;
   };
 
@@ -37,32 +36,18 @@ export const LoginForm = () => {
       onSubmit={handleSubmit}
       validationSchema={schemaFromLogin}
     >
-      {props => (
-        <FormContact>
-          <Label>
-            Email{' '}
-            <Input
-              type="email"
-              name="email"
-              onChange={props.handleChange}
-              value={props.values.email}
-            />
-            <FormError name="email" />
-          </Label>
+      <FormContact>
+        <Label>
+          Email <Input type="email" name="email" />
+          <FormError name="email" />
+        </Label>
 
-          <Label>
-            Password{' '}
-            <Input
-              type="password"
-              name="password"
-              onChange={props.handleChange}
-              value={props.values.password}
-            />
-            <FormError name="password" />
-          </Label>
-          <Button type="submit">Login</Button>
-        </FormContact>
-      )}
+        <Label>
+          Password <Input type="password" name="password" />
+          <FormError name="password" />
+        </Label>
+        <Button type="submit">Login</Button>
+      </FormContact>
     </Formik>
   );
 };

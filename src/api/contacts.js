@@ -9,7 +9,7 @@ export const fetchAddContact = async contact => {
 };
 
 export const fetchDeleteContact = async id => {
-  return await axios.delete(`/contacts${id}`).then(() => id);
+  return await axios.delete(`/contacts/${id}`).then(() => id);
 };
 
 export const fetchEditContact = async ({ id, name, number }) => {

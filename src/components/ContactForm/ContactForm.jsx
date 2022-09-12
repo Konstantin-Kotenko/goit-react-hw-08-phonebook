@@ -8,6 +8,7 @@ import {
   Input,
   Button,
   ErrorText,
+  Name,
 } from './ContactForm.styled';
 import { useRedux } from 'hooks/useRedux';
 
@@ -29,10 +30,10 @@ export const ContactForm = () => {
     return result;
   };
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = ({ name, number }, { resetForm }) => {
     const contact = {
-      name: values.name,
-      number: values.number,
+      name,
+      number,
     };
     if (isContact(contact)) {
       Notify.failure(`${contact.name} already added`);
@@ -51,12 +52,12 @@ export const ContactForm = () => {
     >
       <FormContact>
         <Label>
-          Name
+          <Name>Name</Name>
           <Input type="text" name="name" />
           <FormError name="name" />
         </Label>
         <Label>
-          Number
+          <Name>Number</Name>
           <Input type="tel" name="number" />
           <FormError name="number" />
         </Label>

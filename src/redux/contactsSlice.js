@@ -47,7 +47,7 @@ export const deleteContact = createAsyncThunk(
     try {
       await fetchDeleteContact(id);
       Notify.success('Deleted');
-      const data = fetchAllContacts();
+      const data = await fetchAllContacts();
       return data;
     } catch (error) {
       Notify.failure(error.message);

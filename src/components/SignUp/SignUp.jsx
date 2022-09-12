@@ -21,14 +21,14 @@ const FormError = ({ name }) => (
 export const SignUpp = () => {
   const [dispatch] = useRedux();
 
-  const handleSubmit = values => {
+  const handleSubmit = ({ name, email, password }) => {
     const user = {
-      name: values.name,
-      email: values.email,
-      password: values.password,
+      name,
+      email,
+      password,
     };
     dispatch(authUser(user));
-    <Navigate to="contacts" replace={true} />;
+    <Navigate to="contacts" replace />;
   };
 
   return (

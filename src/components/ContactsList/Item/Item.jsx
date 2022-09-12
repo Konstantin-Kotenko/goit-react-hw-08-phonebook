@@ -27,10 +27,10 @@ export const ContactItem = () => {
 
   return (
     <>
-      {filteredContacts?.map(({ id, name, phone }) => (
+      {filteredContacts?.map(({ id, name, number }) => (
         <Item key={id}>
           <Text>
-            {name} : {phone}
+            {name} : {number}
           </Text>
           <Button onClick={() => onDelete(id)}>Delete</Button>
         </Item>
