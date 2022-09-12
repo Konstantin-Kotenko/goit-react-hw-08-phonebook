@@ -1,10 +1,14 @@
-import { Container } from '../UI/Container';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+`;
 
 export const UserMenu = () => {
   return (
-    <Container>
+    <Wrapper>
       <h2>Hello</h2>
       <button>Logout</button>
-    </Container>
+    </Wrapper>
   );
 };

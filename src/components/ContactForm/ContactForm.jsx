@@ -1,9 +1,6 @@
 import { Formik, ErrorMessage } from 'formik';
 import { schemaFromContacts } from 'schema/schema';
-import {
-  useCreateContactMutation,
-  useGetContactsQuery,
-} from 'redux/contacts/contacts';
+import { getContacts, addNewContact } from 'redux/contactsSlice';
 import { Notify } from 'notiflix';
 import {
   FormContact,
@@ -12,6 +9,7 @@ import {
   Button,
   ErrorText,
 } from './ContactForm.styled';
+import { useRedux } from 'hooks/useRedux';
 
 const FormError = ({ name }) => (
   <ErrorMessage
@@ -21,22 +19,28 @@ const FormError = ({ name }) => (
 );
 
 export const ContactForm = () => {
-  const [createContact, { isLoading }] = useCreateContactMutation();
-  const { data } = useGetContactsQuery();
+  const [dispatch, useSelector] = useRedux();
+  const contacts = useSelector(getContacts);
+
+  const isContact = data => {
+    const result = contacts.find(
+      contact => contact.name.toLowerCase() === data.name.toLowerCase()
+    );
+    return result;
+  };
 
   const handleSubmit = (values, { resetForm }) => {
-    const isContactName = data.find(
-      ({ name }) => name.toLowerCase() === values.name.toLowerCase()
-    );
-
-    if (isContactName) {
-      return Notify.info(
-        `you have this "${values.name.toUpperCase()}" contact`
-      );
+    const contact = {
+      name: values.name,
+      number: values.number,
+    };
+    if (isContact(contact)) {
+      Notify.failure(`${contact.name} already added`);
+      return;
+    } else {
+      dispatch(addNewContact(contact));
     }
-    createContact(values);
     resetForm();
-    Notify.success(`you create new "${values.name.toUpperCase()}" contact`);
   };
 
   return (
@@ -56,9 +60,7 @@ export const ContactForm = () => {
           <Input type="tel" name="number" />
           <FormError name="number" />
         </Label>
-        <Button type="submit" disabled={isLoading}>
-          Add contact
-        </Button>
+        <Button type="submit">Add contact</Button>
       </FormContact>
     </Formik>
   );

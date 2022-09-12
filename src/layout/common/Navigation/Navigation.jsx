@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import { Nav } from 'components/UI/Nav';
 
 export const Navigation = () => {
   return (
-    <nav>
+    <Nav>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/contacts"> Contacts</NavLink>
-    </nav>
+    </Nav>
   );
 };

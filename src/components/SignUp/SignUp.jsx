@@ -7,6 +7,9 @@ import {
 } from 'components/ContactForm/ContactForm.styled';
 import { Formik, ErrorMessage } from 'formik';
 import { schemaFromSignUp } from 'schema/schema';
+import { useRedux } from 'hooks/useRedux';
+import { authUser } from 'redux/authSlice';
+import { Navigate } from 'react-router-dom';
 
 const FormError = ({ name }) => (
   <ErrorMessage
@@ -16,7 +19,18 @@ const FormError = ({ name }) => (
 );
 
 export const SignUpp = () => {
-  const handleSubmit = (values, { resetForm }) => {};
+  const [dispatch] = useRedux();
+
+  const handleSubmit = (values, { resetForm }) => {
+    const user = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    };
+    dispatch(authUser(user));
+    <Navigate to="contacts" replace={true} />;
+  };
+
   return (
     <Formik
       initialValues={{ name: '', email: '', password: '' }}

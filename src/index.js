@@ -3,9 +3,10 @@ import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { GlobalStyle } from 'styleConfig/GlobalStyle';
 import { theme } from 'styleConfig/theme';
-import { store } from './redux/store';
+import { store, persistor } from './redux/store';
 import { App } from './App.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -13,10 +14,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <GlobalStyle />
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        {/* <PersisGate loading={null} persistor={persistor}></PersisGate> */}
-        <BrowserRouter basename="/goit-react-hw-08-phonebook/">
-          <App />
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter basename="/goit-react-hw-08-phonebook/">
+            <App />
+          </BrowserRouter>
+        </PersistGate>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>

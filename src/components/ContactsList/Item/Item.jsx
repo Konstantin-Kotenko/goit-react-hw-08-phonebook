@@ -1,27 +1,29 @@
 import { Item, Text, Button } from './Item.styled';
-import { getFilterValue, useGetContactsQuery } from 'redux/contacts/contacts';
-import { useSelector } from 'react-redux';
-import { useMemo } from 'react';
-import { createSelector } from '@reduxjs/toolkit';
+import { useEffect } from 'react';
+import { useRedux } from 'hooks/useRedux';
+import {
+  getContacts,
+  getFilterValue,
+  getAllContacts,
+  deleteContact,
+} from 'redux/contactsSlice';
 
-export const ContactItem = ({ contacts, onDelete, isLoading }) => {
+export const ContactItem = () => {
+  const [dispatch, useSelector] = useRedux();
+  const contacts = useSelector(getContacts);
   const filter = useSelector(getFilterValue);
 
-  const checkedContact = useMemo(() => {
-    return createSelector(
-      [r => r.data, (contacts, filter) => filter],
-      (contacts, filter) =>
-        contacts?.filter(({ name }) => {
-          return name.toLowerCase().includes(filter.toLowerCase());
-        })
-    );
-  }, []);
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
-  const { filteredContacts } = useGetContactsQuery(undefined, {
-    selectFromResult(result) {
-      return { ...result, filteredContacts: checkedContact(result, filter) };
-    },
-  });
+  useEffect(() => {
+    dispatch(getAllContacts());
+  }, [dispatch]);
+
+  const onDelete = id => {
+    dispatch(deleteContact(id));
+  };
 
   return (
     <>
@@ -30,9 +32,7 @@ export const ContactItem = ({ contacts, onDelete, isLoading }) => {
           <Text>
             {name} : {phone}
           </Text>
-          <Button onClick={() => onDelete(id)} disabled={isLoading}>
-            Delete
-          </Button>
+          <Button onClick={() => onDelete(id)}>Delete</Button>
         </Item>
       ))}
     </>

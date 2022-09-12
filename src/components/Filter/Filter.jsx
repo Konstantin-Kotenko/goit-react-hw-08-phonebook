@@ -1,14 +1,13 @@
-import PropTypes from 'prop-types';
-import { filterItems, getFilterValue } from '../../redux/contacts/contacts';
-import { useSelector, useDispatch } from 'react-redux';
+import { useRedux } from 'hooks/useRedux';
+import { filterContacts, getFilterValue } from 'redux/contactsSlice';
 import { Label, Input } from './Filter.styled';
 
 export const Filter = () => {
+  const [dispatch, useSelector] = useRedux();
   const filter = useSelector(getFilterValue);
-  const dispatch = useDispatch();
 
   const changeFilter = e => {
-    dispatch(filterItems(e.target.value));
+    dispatch(filterContacts(e.target.value));
   };
 
   return (
@@ -17,9 +16,4 @@ export const Filter = () => {
       <Input type="text" value={filter} onChange={changeFilter} />
     </Label>
   );
-};
-
-Filter.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
 };

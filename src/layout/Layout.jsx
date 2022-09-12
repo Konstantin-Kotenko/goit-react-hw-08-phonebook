@@ -7,11 +7,9 @@ export const Layout = () => {
   return (
     <Container>
       <AppBar />
-      <Container>
-        <Suspense fallback={<h1>Loading...</h1>}>
-          <Outlet />
-        </Suspense>
-      </Container>
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Outlet />
+      </Suspense>
     </Container>
   );
 };
