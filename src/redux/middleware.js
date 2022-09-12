@@ -7,10 +7,9 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-export const middleware = getDefaultMiddleware => [
-  ...getDefaultMiddleware({
+export const middleware = getDefaultMiddleware =>
+  getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
-  }),
-];
+  });

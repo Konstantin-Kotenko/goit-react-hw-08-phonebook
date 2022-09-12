@@ -12,7 +12,7 @@ const initialState = {
   isLogged: false,
 };
 
-export const getuserName = state => state.auth.user.name;
+export const getUserName = state => state.auth.user.name;
 export const getLogging = state => state.auth.isLogged;
 export const getToken = state => state.auth.token;
 
@@ -27,7 +27,7 @@ export const authUser = createAsyncThunk('auth/register', async values => {
   }
 });
 
-export const LoginUser = createAsyncThunk('auth/login', async values => {
+export const loginUser = createAsyncThunk('auth/login', async values => {
   try {
     const { data } = await axios.post('/users/login', values);
     token.set(data.token);
@@ -38,7 +38,7 @@ export const LoginUser = createAsyncThunk('auth/login', async values => {
   }
 });
 
-export const LogoutUser = createAsyncThunk('auth/logout', async () => {
+export const logoutUser = createAsyncThunk('auth/logout', async () => {
   try {
     await axios.post('/users/logout');
     token.unset();
@@ -57,12 +57,12 @@ export const authSlice = createSlice({
       state.token = action.payload.token;
       state.isLogged = true;
     },
-    [LoginUser.fulfilled](state, action) {
+    [loginUser.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLogged = true;
     },
-    [LogoutUser.fulfilled](state) {
+    [logoutUser.fulfilled](state) {
       state.user = {
         name: '',
         email: null,

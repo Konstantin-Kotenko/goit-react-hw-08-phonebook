@@ -1,15 +1,20 @@
-import { Outlet } from 'react-router-dom';
-import { Suspense } from 'react';
-import { AppBar } from './common/AppBar/AppBar';
+import { Navigation } from './common/Navigation/Navigation';
+import { UserBar } from './common/UserBar/UserBar';
 import { Container } from '../components/UI/Container';
+import { Outlet } from 'react-router-dom';
 
-export const Layout = () => {
+const Layout = () => {
   return (
     <Container>
-      <AppBar />
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <nav>
+        <Navigation />
+        <UserBar />
+      </nav>
+      <div>
         <Outlet />
-      </Suspense>
+      </div>
     </Container>
   );
 };
+
+export default Layout;

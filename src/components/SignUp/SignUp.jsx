@@ -9,7 +9,7 @@ import { Formik, ErrorMessage } from 'formik';
 import { schemaFromSignUp } from 'schema/schema';
 import { useRedux } from 'hooks/useRedux';
 import { authUser } from 'redux/authSlice';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 
 const FormError = ({ name }) => (
   <ErrorMessage
@@ -21,7 +21,7 @@ const FormError = ({ name }) => (
 export const SignUpp = () => {
   const [dispatch] = useRedux();
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = values => {
     const user = {
       name: values.name,
       email: values.email,
