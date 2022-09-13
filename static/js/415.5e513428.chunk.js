@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[415],{5415:function(e,t,r){r.r(t);var c=r(2250),a=r(3329);t.default=function(){return(0,a.jsx)(a.Fragment,{children:(0,a.jsx)("picture",{children:(0,a.jsx)("source",{srcSet:c})})})}},2250:function(e,t,r){e.exports=r.p+"static/media/background.369b14688de6466cafb6.jpg"}}]);
-//# sourceMappingURL=415.5e513428.chunk.js.map
