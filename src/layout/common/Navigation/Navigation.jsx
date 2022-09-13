@@ -16,15 +16,19 @@ const Link = styled(NavLink)`
 
 const NavList = styled.ul`
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
   align-items: center;
 `;
 
 const NavItem = styled.li`
   cursor: pointer;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   list-style: none;
+  :not(:first-child) {
+    margin-left: auto;
+  }
 `;
 
 export const Navigation = () => {

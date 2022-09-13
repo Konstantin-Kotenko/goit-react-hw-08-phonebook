@@ -6,7 +6,9 @@ export const FormContact = styled(Form)`
   display: flex;
   margin: 0 auto;
   flex-direction: column;
+  border-radius: ${({ theme }) => theme.radii.normal};
   width: 360px;
+  /* background-color: ; */
   padding: ${({ theme }) => theme.space.ml};
 `;
 

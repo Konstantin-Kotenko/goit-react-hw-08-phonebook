@@ -5,13 +5,10 @@ import { NavLink } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-const Div = styled.div`
-  justify-content: space-between;
-  width: 100%;
-`;
-
-const Navigation = styled.div`
+const Navigation = styled.ul`
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: auto;
 `;
 
@@ -19,6 +16,10 @@ const NavList = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: auto;
+  :last-child {
+    padding-right: 20px;
+  }
 `;
 
 const NavItem = styled.li`
@@ -41,11 +42,15 @@ const Link = styled(NavLink)`
 `;
 
 const Button = styled.button`
-  padding: 8px 16px;
   border-radius: 4px;
-  text-decoration: none;
+  display: block;
+  padding: 12px 25px;
+  border: none;
+  cursor: pointer;
   color: black;
-  font-weight: 500;
+  background-color: white;
+  font-weight: bold;
+  margin-left: 15px;
   &.active {
     color: black;
     background-color: white;
@@ -63,13 +68,17 @@ export const UserBar = () => {
   };
 
   return (
-    <Div>
+    <>
       {isLogged ? (
         <Navigation>
-          <p>{name.toUpperCase()}</p>
-          <Button type="button" onClick={logoutHandler}>
-            Logout
-          </Button>
+          <NavItem>
+            <p>Welcome {name}</p>
+          </NavItem>
+          <NavItem>
+            <Button type="button" onClick={logoutHandler}>
+              Logout
+            </Button>
+          </NavItem>
         </Navigation>
       ) : (
         <NavList>
@@ -81,6 +90,6 @@ export const UserBar = () => {
           </NavItem>
         </NavList>
       )}
-    </Div>
+    </>
   );
 };

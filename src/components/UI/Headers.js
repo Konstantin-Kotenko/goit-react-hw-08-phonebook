@@ -15,3 +15,11 @@ export const SecondHeader = styled.h2`
   font-size: ${({ theme }) => theme.fontSizes.ml};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `;
+
+export const Quot = styled.p`
+  display: flex;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.black};
+  font-size: ${({ theme }) => theme.fontSizes.m};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+`;
