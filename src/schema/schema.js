@@ -1,8 +1,12 @@
 import * as yup from 'yup';
 
+const phoneRegExp =
+  /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
+
 export const schemaFromContacts = yup.object().shape({
   name: yup
     .string()
+    .max(10)
     .required('Enter name')
     .matches(
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
@@ -12,7 +16,7 @@ export const schemaFromContacts = yup.object().shape({
     .string()
     .required('Enter number')
     .matches(
-      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+      phoneRegExp,
       'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
     ),
 });

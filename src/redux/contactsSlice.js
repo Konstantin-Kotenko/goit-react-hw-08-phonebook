@@ -12,9 +12,6 @@ const initialState = {
   filter: '',
 };
 
-export const getContacts = state => state.contacts.contacts;
-export const getFilterValue = state => state.contacts.filter;
-
 export const getAllContacts = createAsyncThunk(
   'constacts/getAllContacts',
   async () => {
@@ -92,5 +89,8 @@ export const contactsSlice = createSlice({
     },
   },
 });
+
+export const getContacts = state => state.contacts.contacts;
+export const getFilterValue = state => state.contacts.filter;
 
 export const { filterContacts } = contactsSlice.actions;

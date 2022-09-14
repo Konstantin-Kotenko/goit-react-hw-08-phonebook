@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from 'redux/authSlice';
+import { logoutUser, getUserName, getLogging } from 'redux/authSlice';
 import { Navigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
@@ -9,17 +9,15 @@ const Navigation = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: auto;
+  margin: 0;
+  padding: 0;
 `;
 
 const NavList = styled.ul`
   display: flex;
+  margin: 0;
   justify-content: center;
   align-items: center;
-  margin-left: auto;
-  :last-child {
-    padding-right: 20px;
-  }
 `;
 
 const NavItem = styled.li`
@@ -47,19 +45,23 @@ const Button = styled.button`
   padding: 12px 25px;
   border: none;
   cursor: pointer;
-  color: black;
-  background-color: white;
+  color: white;
+  background-color: black;
   font-weight: bold;
   margin-left: 15px;
-  &.active {
+  :hover {
     color: black;
     background-color: white;
   }
 `;
 
+const User = styled.p`
+  margin: 0;
+`;
+
 export const UserBar = () => {
-  const name = useSelector(state => state.auth.user.name);
-  const isLogged = useSelector(state => state.auth.isLogged);
+  const name = useSelector(getUserName);
+  const isLogged = useSelector(getLogging);
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
@@ -72,7 +74,7 @@ export const UserBar = () => {
       {isLogged ? (
         <Navigation>
           <NavItem>
-            <p>Welcome {name}</p>
+            <User>Welcome: {name}</User>
           </NavItem>
           <NavItem>
             <Button type="button" onClick={logoutHandler}>

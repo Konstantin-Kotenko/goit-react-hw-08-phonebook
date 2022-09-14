@@ -1,6 +1,5 @@
 import { Formik, ErrorMessage } from 'formik';
 import { useRedux } from 'hooks/useRedux';
-import { Navigate } from 'react-router-dom';
 import {
   FormContact,
   Label,
@@ -27,7 +26,6 @@ export const LoginForm = () => {
       password,
     };
     dispatch(loginUser(user));
-    <Navigate to="contacts" replace />;
   };
 
   return (

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Notify } from 'notiflix';
-import axios from 'axios';
 import { token } from 'api/axios';
+import { register, login, logout, current } from 'api/auth';
 
 const initialState = {
   user: {
@@ -12,13 +12,13 @@ const initialState = {
   isLogged: false,
 };
 
-export const getUserName = state => state.auth.user.name;
+export const getUserName = state => state.auth.user?.name;
 export const getLogging = state => state.auth.isLogged;
 export const getToken = state => state.auth.token;
 
-export const authUser = createAsyncThunk('auth/register', async values => {
+export const authUser = createAsyncThunk('auth/register', async credentials => {
   try {
-    const { data } = await axios.post('/users/signup', values);
+    const data = await register(credentials);
     token.set(data.token);
     Notify.success('You are autharization');
     return data;
@@ -27,9 +27,9 @@ export const authUser = createAsyncThunk('auth/register', async values => {
   }
 });
 
-export const loginUser = createAsyncThunk('auth/login', async values => {
+export const loginUser = createAsyncThunk('auth/login', async credentials => {
   try {
-    const { data } = await axios.post('/users/login', values);
+    const data = await login(credentials);
     token.set(data.token);
     Notify.success('you are login');
     return data;
@@ -40,13 +40,34 @@ export const loginUser = createAsyncThunk('auth/login', async values => {
 
 export const logoutUser = createAsyncThunk('auth/logout', async () => {
   try {
-    await axios.post('/users/logout');
+    await logout();
     token.unset();
     Notify.success('You are logout');
   } catch (error) {
     Notify.failure(error.message);
   }
 });
+
+export const fetchCurrentUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkApi) => {
+    const state = thunkApi.getState();
+    const persistedToken = state.auth.token;
+
+    if (!persistedToken) {
+      return thunkApi.rejectWithValue();
+    }
+
+    token.set(persistedToken);
+    try {
+      const data = await current();
+      return data;
+    } catch (error) {
+      token.unset();
+      Notify.failure(error.message);
+    }
+  }
+);
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -69,6 +90,10 @@ export const authSlice = createSlice({
       };
       state.token = null;
       state.isLogged = false;
+    },
+    [fetchCurrentUser.fulfilled](state, action) {
+      state.user = action.payload;
+      state.isLogged = true;
     },
   },
 });

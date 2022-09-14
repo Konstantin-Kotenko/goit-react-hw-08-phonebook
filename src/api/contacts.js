@@ -1,19 +1,13 @@
-import axios from 'axios';
+import { authApi } from './axios';
 
-export const fetchAllContacts = async () => {
-  return await axios.get('/contacts').then(response => response.data);
-};
+export const fetchAllContacts = async () =>
+  await authApi.get('/contacts').then(r => r.data);
 
-export const fetchAddContact = async contact => {
-  return await axios.post('/contacts', contact).then(response => response.data);
-};
+export const fetchAddContact = async contact =>
+  await authApi.post('/contacts', contact).then(r => r.data);
 
-export const fetchDeleteContact = async id => {
-  return await axios.delete(`/contacts/${id}`).then(() => id);
-};
+export const fetchDeleteContact = async id =>
+  await authApi.delete(`/contacts/${id}`).then(r => r.data);
 
-export const fetchEditContact = async ({ id, name, number }) => {
-  return await axios
-    .patch(`/contacts${id}`, { name, number })
-    .then(response => response.data);
-};
+export const fetchEditContact = async ({ id, name, number }) =>
+  await authApi.patch(`/contacts${id}`, { name, number }).then(r => r.data);

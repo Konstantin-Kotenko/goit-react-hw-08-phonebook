@@ -9,7 +9,6 @@ import { Formik, ErrorMessage } from 'formik';
 import { schemaFromSignUp } from 'schema/schema';
 import { useRedux } from 'hooks/useRedux';
 import { authUser } from 'redux/authSlice';
-import { Navigate } from 'react-router';
 
 const FormError = ({ name }) => (
   <ErrorMessage
@@ -28,7 +27,6 @@ export const SignUpp = () => {
       password,
     };
     dispatch(authUser(user));
-    <Navigate to="contacts" replace />;
   };
 
   return (

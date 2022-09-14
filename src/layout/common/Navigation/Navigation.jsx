@@ -20,12 +20,15 @@ const NavList = styled.ul`
   justify-content: space-between;
   -webkit-box-align: center;
   align-items: center;
+  padding: 0;
 `;
 
 const NavItem = styled.li`
   cursor: pointer;
   justify-content: space-between;
   list-style: none;
+  padding: 0;
+  margin: 0;
   :not(:first-child) {
     margin-left: auto;
   }
