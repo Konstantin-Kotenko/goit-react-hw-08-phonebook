@@ -8,7 +8,6 @@ export const FormContact = styled(Form)`
   flex-direction: column;
   border-radius: ${({ theme }) => theme.radii.normal};
   width: 360px;
-  /* background-color: ; */
   padding: ${({ theme }) => theme.space.ml};
 `;
 
@@ -21,16 +20,29 @@ export const Label = styled.label`
 
 export const Input = styled(Field)`
   margin-top: ${({ theme }) => theme.space.ml};
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  text-decoration: none;
+  font-weight: 500;
 `;
 
 export const Button = styled.button`
   margin-top: ${({ theme }) => theme.space.ml};
   width: 130px;
-
   margin: 15px auto 0;
-  border-radius: 5px;
   border: ${({ theme }) => theme.borders.none};
   cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.black};
+  font-weight: 500;
+  :hover {
+    color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.white};
+  }
 `;
 
 export const Name = styled.p`

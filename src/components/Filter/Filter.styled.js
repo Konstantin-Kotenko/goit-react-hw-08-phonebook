@@ -11,4 +11,9 @@ export const Label = styled.label`
 export const Input = styled.input`
   width: 200px;
   margin-top: ${({ theme }) => theme.space.ml};
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  text-decoration: none;
+  font-weight: 500;
 `;

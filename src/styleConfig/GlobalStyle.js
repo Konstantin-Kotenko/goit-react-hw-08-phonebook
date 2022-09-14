@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import saf from '../img/saf.jpg';
 
 export const GlobalStyle = createGlobalStyle`
 body {
@@ -8,6 +9,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(${saf});
+  width: 100%;
+  height: 100%;
 }
 
 code {
@@ -20,7 +24,7 @@ h2,
 h3,
 p {
   padding: 0;
-margin: 0;
+  margin: 0;
 }
 
 a {

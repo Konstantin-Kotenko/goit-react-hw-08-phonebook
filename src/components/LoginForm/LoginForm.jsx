@@ -26,6 +26,7 @@ export const LoginForm = () => {
       password,
     };
     dispatch(loginUser(user));
+    
   };
 
   return (

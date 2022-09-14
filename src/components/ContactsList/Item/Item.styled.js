@@ -17,4 +17,15 @@ export const Button = styled.button`
   border: ${({ theme }) => theme.radii.none};
   border-radius: ${({ theme }) => theme.radii.none};
   cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  :hover {
+    color: black;
+    background-color: white;
+  }
+  background-color: black;
+  color: white;
 `;

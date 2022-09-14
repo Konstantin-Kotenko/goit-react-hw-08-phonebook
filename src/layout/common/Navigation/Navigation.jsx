@@ -6,8 +6,12 @@ const Link = styled(NavLink)`
   padding: 8px 16px;
   border-radius: 4px;
   text-decoration: none;
-  color: black;
+  color: white;
   font-weight: 500;
+  :hover {
+    color: black;
+    background-color: white;
+  }
   &.active {
     color: black;
     background-color: white;
